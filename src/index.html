@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- additional data -->
+    <meta name="keywords" content="ToDo, plan, task, задача, план" />
+    <meta
+      name="description"
+      content="This is an application for making a plan of the day |
+            Это приложение для составления плана дня"
+    />
+    <!-- icon -->
+    <link rel="shortcut icon" href="img/check_circle.svg" />
+    <!-- css -->
+    <!--    <link rel="stylesheet" href="./src/style.scss" />-->
+    <!-- js -->
+    <script src="index.js" defer></script>
+    <title>ToDo</title>
+  </head>
+  <body>
+    <!-- header -->
+    <header class="main-header">
+      <!-- logo -->
+      <img class="main-header-logo" src="img/Logo.svg" alt="logo" />
+      <!-- search -->
+      <div class="main-header-search">
+        <img
+          class="main-header-search-icon"
+          src="img/search.svg"
+          alt="search"
+        />
+        <input
+          class="main-header-search-input"
+          type="text"
+          placeholder="Поиск"
+        />
+        <button id="btn-close-search" class="btn">
+          <img src="img/icon_close.svg" alt="close" />
+        </button>
+      </div>
+      <!-- hint -->
+      <img id="hint" src="img/Hint.png" alt="hint" />
+    </header>
+
+    <!-- main -->
+    <main>
+      <!-- menu -->
+      <div class="menu">
+        <div>
+          <button class="btn-menu">
+            <img src="img/menu.svg" alt="menu" />
+          </button>
+        </div>
+        <div id="menu-pages">
+          <div>
+            <button class="btn-menu-pages" data-id="1">
+              <span class="btn-menu-content">
+                <img src="img/icon_my_day.svg" alt="MyDay" />
+                <p class="text-btn">Мой день</p>
+              </span>
+            </button>
+          </div>
+          <div>
+            <button class="btn-menu-pages" data-id="2">
+              <span class="btn-menu-content">
+                <img src="img/icon_important.svg" alt="Important" />
+                <p class="text-btn">Важно</p>
+              </span>
+            </button>
+          </div>
+          <div>
+            <button class="btn-menu-pages" data-id="3">
+              <span class="btn-menu-content">
+                <img src="img/icon_notes.svg" alt="Notes" />
+                <p class="text-btn">Заметки</p>
+              </span>
+            </button>
+          </div>
+          <div>
+            <button class="btn-menu-pages" data-id="4">
+              <span class="btn-menu-content">
+                <img src="img/icon_reminder.svg" alt="Reminders" />
+                <p class="text-btn">Напоминания</p>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- fields -->
+      <!-- main field -->
+      <div class="field main-field" data-id="1">
+        <div class="main-field-add">
+          <input
+            class="main-field-add-input"
+            placeholder="Заметки"
+            type="text"
+          />
+          <div class="main-field-btns">
+            <button class="btn main-field-btn">
+              <img src="img/icon_list.svg" alt="list" />
+            </button>
+            <button class="btn main-field-btn">
+              <img src="img/icon_check.svg" alt="add" />
+            </button>
+            <button class="btn main-field-btn">
+              <img src="img/icon_close.svg" alt="close" />
+            </button>
+          </div>
+        </div>
+        <span class="hint">
+          <img src="img/main_icon_page.svg" alt="hint-icon" />
+          <p>Здесь будут ваши заметки</p>
+        </span>
+      </div>
+
+      <!-- important field -->
+      <div class="field important-field" data-id="2"></div>
+
+      <!-- notes field -->
+      <div class="field notes-field" data-id="3"></div>
+
+      <!-- reminders field -->
+      <div class="field reminders-field" data-id="4"></div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+@import "style/_base.scss";
+
+/* style of header */
+.main-header {
+  display: flex;
+  height: 64px;
+  background: #e1e8f1;
+  align-items: center;
+}
+.main-header .main-header-logo {
+  margin-left: 27px;
+}
+.main-header .main-header-search {
+  position: relative;
+  padding: 0 54px 0 0;
+  margin: 0 auto;
+  display: flex;
+  background: #fff;
+  border-radius: 10px;
+  align-items: center;
+  transition: none;
+}
+.main-header .main-header-search-icon {
+  margin: 12px 12px 8px 12px;
+}
+.main-header .main-header-search-input {
+  width: 530px;
+  height: 47px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+.main-header #btn-close-search {
+  display: none;
+}
+.main-header #hint {
+  opacity: 0;
+  position: absolute;
+  left: 68.4rem;
+}
+
+/* style of menu */
+.menu {
+  width: 280px;
+  height: 100%;
+  flex-wrap: wrap;
+}
+.menu .btn-menu {
+  margin: 21px 0 0 21px;
+  padding: 10px;
+  border-radius: 50px;
+}
+.btn-menu:hover {
+  background: #e1e8f1;
+  transition: 0.2s;
+}
+.menu .btn-menu-pages {
+  display: flex;
+  width: 180px;
+  margin: 5px 0 5px 13px;
+  padding: 18px 26px 18px 0;
+  border-radius: 50px;
+  transition: none;
+}
+[data-id="1"] {
+  background: #e1e8f1;
+}
+.menu .btn-menu-pages:hover {
+  background: #e1e8f1;
+  transition: 0.2s;
+}
+.menu .btn-menu-content {
+  margin-left: 1.4rem;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+.menu .btn-menu-content p {
+  margin: 0 0 0 10px;
+  font-size: 15px;
+}
+
+/* style of fields */
+/* main field */
+.main-field {
+  background: #efefef;
+}
+.main-field .main-field-add {
+  width: 539px;
+  height: 44px;
+  display: flex;
+  margin: 47px auto 0;
+  padding: 0 0 0 1.5rem;
+  background: #fff;
+  border-radius: 10px;
+  align-items: center;
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.25);
+}
+.main-field .main-field-add-input {
+  width: 539px;
+  height: 44px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+.main-field .main-field-btns {
+  height: 100%;
+  display: flex;
+}
+.main-field .main-field-btn {
+  padding: 10px;
+  margin: 0 10px 0 0;
+}
+.main-field .hint {
+  width: 450px;
+  margin: 120px auto 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 25px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+/* important field */
+.important-field {
+  display: none;
+  /* background: red; */
+}
+
+/* notes field */
+.notes-field {
+  display: none;
+}
+
+/* reminders field */
+.reminders-field {
+  display: none;
+}

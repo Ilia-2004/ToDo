@@ -1,0 +1,39 @@
+/* base style */
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Inter:wght@300&family=Montserrat:wght@300&family=Oswald:wght@200;300&family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  user-select: none;
+  transition: all 0.1s;
+}
+
+main {
+  display: flex;
+  height: 90vh;
+}
+
+button {
+  border: none;
+  background: none;
+  margin: 12px 12px 8px 12px;
+  cursor: pointer;
+}
+
+.field {
+  width: 100%;
+  height: 100%;
+  background: #efefef;
+}
+
+.btn {
+  margin: 0 10px 0 0;
+  padding: 10px;
+  border-radius: 50px;
+  border: none;
+}
+.btn:hover {
+  background: #dbdbdb;
+  transition: 0.2s;
+}
