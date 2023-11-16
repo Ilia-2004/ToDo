@@ -12,11 +12,17 @@ module.exports = {
   mode,
   target,
   devtool,
-  entry: path.resolve(__dirname, "src", "index.js"),
+  devServer: {
+    port: 3000,
+    open: true,
+    hot: true, // выключить, если не будет работать сервер
+  },
+  entry: ["@babel/polyfill", path.resolve(__dirname, "src", "index.js")],
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
     filename: "main.[contenthash].js",
+    // assetModuleFilename: "assets/[name][ext]",
   },
 
   plugins: [
@@ -35,11 +41,45 @@ module.exports = {
         loader: "html-loader",
       },
       {
-        test: /\.(c|sa|sc|le)ss$/,
+        test: /\.(c|sa|sc|le)ss$/i,
         use: [
           devMode ? "style-loader" : MiniCssExtractPlugin.loader,
           "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [require("postcss-preset-env")],
+              },
+            },
+          },
           "sass-loader",
+        ],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "fonts/[name][ext]",
+        },
+      },
+      {
+        test: /\.(jpe?g|png|webp|gif|svg)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "img/[name][ext]",
+        },
+      },
+      {
+        test: /\.(?:js|mjs|cjs)$/i,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [["@babel/preset-env", { targets: "defaults" }]],
+            },
+          },
         ],
       },
     ],
