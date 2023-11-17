@@ -1,23 +1,9 @@
 import "./index.html";
 import "./style.scss";
-
-/* const's */
-// const form header
-const hintSearch = document.querySelector("#hint");
-const mainHeaderSearch = document.querySelector(".main-header-search");
-const searchInputHeader = document.querySelector(".main-header-search-input");
-const btnCloseSearch = document.querySelector("#btn-close-search");
-// const form menu
-const menu = document.querySelector(".menu");
-const menuBtn = document.querySelector(".btn-menu");
-const menuPages = document.querySelector("#menu-pages");
-const btnMenuPages = document.querySelectorAll(".btn-menu-pages");
-const textBtn = document.querySelectorAll(".text-btn");
-// const from field
-const fields = document.querySelectorAll(".field");
+import "./scripts/consts";
 
 // header
-/** for hover on search */
+// for hover on search
 mainHeaderSearch.addEventListener("mouseover", () => {
   hintSearch.style.transition = "opacity 0.3s ease-out";
   hintSearch.style.opacity = "1";
@@ -26,12 +12,12 @@ mainHeaderSearch.addEventListener("mouseout", () => {
   removeHint();
 });
 
-/** hint from click input */
+// hint from click input
 searchInputHeader.addEventListener("click", () => {
   removeHint();
 });
 
-/** add button close on search */
+// add button close on search
 searchInputHeader.addEventListener("input", () => {
   if (searchInputHeader.value.length !== 0) {
     btnCloseSearch.style.display = "block";
@@ -43,7 +29,7 @@ searchInputHeader.addEventListener("input", () => {
   }
 });
 
-/** button close */
+// button close
 btnCloseSearch.addEventListener("click", () => {
   searchInputHeader.value = "";
   btnCloseSearch.style.display = "none";
@@ -51,13 +37,13 @@ btnCloseSearch.addEventListener("click", () => {
 });
 
 // menu
-/** button menu */
+// button menu
 menuBtn.addEventListener("click", () => {
   if (menu.style.width !== "100px") changeMenu(100, 70, "efefef", "none");
   else changeMenu(280, 180, "fff", "block");
 });
 
-/** switch between pages */
+// switch between pages
 menuPages.addEventListener("click", (event) => {
   const buttonField = event.target.closest("button");
   if (!buttonField) return;
