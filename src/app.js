@@ -1,8 +1,24 @@
 import "./index.html";
 import "./style.scss";
-import "./scripts/consts";
 
-// header
+/* const's */
+// const form header
+const hintSearch = document.querySelector("#hint");
+const mainHeaderSearch = document.querySelector(".main-header-search");
+const searchInputHeader = document.querySelector(".main-header-search-input");
+const btnCloseSearch = document.querySelector("#btn-close-search");
+// const form menu
+const menu = document.querySelector(".menu");
+const menuBtn = document.querySelector(".btn-menu");
+const menuPages = document.querySelector("#menu-pages");
+const btnMenuPages = document.querySelectorAll(".btn-menu-pages");
+const textBtn = document.querySelectorAll(".text-btn");
+// const from field
+const fields = document.querySelectorAll(".field");
+const fieldInput = document.querySelector(".main-field-add-input");
+const btnCloseField = document.querySelector("#btn-close-field");
+
+/* header */
 // for hover on search
 mainHeaderSearch.addEventListener("mouseover", () => {
   hintSearch.style.transition = "opacity 0.3s ease-out";
@@ -36,7 +52,7 @@ btnCloseSearch.addEventListener("click", () => {
   mainHeaderSearch.style.padding = "0 54px 0 0";
 });
 
-// menu
+/* menu */
 // button menu
 menuBtn.addEventListener("click", () => {
   if (menu.style.width !== "100px") changeMenu(100, 70, "efefef", "none");
@@ -65,6 +81,12 @@ menuPages.addEventListener("click", (event) => {
       f.style.display = "block";
     } else f.style.display = "none";
   });
+});
+
+/* field */
+// button close
+btnCloseField.addEventListener("click", () => {
+  fieldInput.value = "";
 });
 
 // helpers functions
