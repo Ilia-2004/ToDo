@@ -348,6 +348,97 @@ button {
   transition: 0.2s;
 }
 
+input[type=checkbox]:checked,
+input[type=checkbox]:not(:checked),
+input[type=radio]:checked,
+input[type=radio]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+
+input[type=checkbox]:checked + label,
+input[type=checkbox]:not(:checked) + label,
+input[type=radio]:checked + label,
+input[type=radio]:not(:checked) + label {
+  display: inline-block;
+  position: relative;
+  padding-left: 28px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+input[type=checkbox]:checked + label:before,
+input[type=checkbox]:not(:checked) + label:before,
+input[type=radio]:checked + label:before,
+input[type=radio]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 17px;
+  height: 18px;
+  border: 2px solid #000;
+  background-color: #ffffff;
+}
+
+input[type=checkbox]:checked + label:before,
+input[type=checkbox]:not(:checked) + label:before {
+  border-radius: 10px;
+}
+
+input[type=radio]:checked + label:before,
+input[type=radio]:not(:checked) + label:before {
+  border-radius: 100%;
+}
+
+input[type=checkbox]:checked + label:after,
+input[type=checkbox]:not(:checked) + label:after,
+input[type=radio]:checked + label:after,
+input[type=radio]:not(:checked) + label:after {
+  content: "";
+  position: absolute;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+input[type=checkbox]:checked + label:after,
+input[type=checkbox]:not(:checked) + label:after {
+  left: 3px;
+  top: 4px;
+  width: 10px;
+  height: 5px;
+  border-radius: 1px;
+  border-left: 4px solid #e145a3;
+  border-bottom: 4px solid #e145a3;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+input[type=radio]:checked + label:after,
+input[type=radio]:not(:checked) + label:after {
+  left: 5px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: #e145a3;
+}
+
+input[type=checkbox]:not(:checked) + label:after,
+input[type=radio]:not(:checked) + label:after {
+  opacity: 0;
+}
+
+input[type=checkbox]:checked + label:after,
+input[type=radio]:checked + label:after {
+  opacity: 1;
+}
+
 /* fonts */
 @font-face {
   font-family: "Inter";
@@ -479,15 +570,6 @@ button {
   height: 104px;
   border-radius: 20px;
   background: #ffffff;
-}
-.main-field .notes-btn-execute {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 35px;
-  height: 35px;
-  border: 3px solid #000;
-  border-radius: 50px;
 }
 
 /* important field */
