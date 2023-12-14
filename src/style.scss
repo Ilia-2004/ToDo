@@ -11,7 +11,7 @@
 .main-header {
   display: flex;
   height: 64px;
-  background: #e1e8f1;
+  background: $firstColor;
   align-items: center;
   &-logo {
     margin-left: 27px;
@@ -56,7 +56,7 @@
     padding: 10px;
     border-radius: 50px;
     &:hover {
-      background: #e1e8f1;
+      background: $firstColor;
       transition: 0.2s;
     }
     &-pages {
@@ -67,12 +67,12 @@
       border-radius: 50px;
       transition: none;
       &:hover {
-        background: #e1e8f1;
+        background: $firstColor;
         transition: 0.2s;
       }
     }
     [data-id="1"] {
-      background: #e1e8f1;
+      background: $firstColor;
     }
     &-content {
        margin-left: 1.4rem;
@@ -90,7 +90,7 @@
 /* style of fields */
 /* main field */
 .main-field {
-  background: #efefef;
+  background: $secondColor;
   &-add {
     width: 539px;
     height: 44px;
@@ -132,7 +132,14 @@
     width: 240px;
     height: 104px;
     border-radius: 20px;
-    background: #ffffff;
+    background: #fff;
+    &-check-btns {
+      display: flex;
+      justify-content: space-between;
+    }
+    p {
+      margin: 15px 0 0 18px;
+    }
   }
 }
 
