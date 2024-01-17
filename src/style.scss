@@ -3,8 +3,16 @@
 
 /* fonts */
 @font-face {
-  font-family: "Inter";
-  src: url("./fonts/Inter-VariableFont_slnt,wght.ttf") format("ttf");
+  font-family: 'Inter Tight';
+  src: url('/src/fonts/InterTight-Regular.eot');
+  src: local('Inter Tight Regular'), local('InterTight-Regular'),
+  url('/src/fonts/InterTight-Regular.eot?#iefix') format('embedded-opentype'),
+  url('/src/fonts/InterTight-Regular.woff2') format('woff2'),
+  url('/src/fonts/InterTight-Regular.woff') format('woff'),
+  url('/src/fonts/InterTight-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* style of header */
@@ -130,15 +138,57 @@
 
   .notes {
     width: 240px;
-    height: 104px;
+    height: 125px;
     border-radius: 20px;
     background: #fff;
+    margin: 0 0 0 1rem;
     &-check-btns {
       display: flex;
       justify-content: space-between;
+      label input {
+      display: none;
+      }
+      label span {
+        height: 20px;
+        width: 20px;
+        border: 4px solid black;
+        display: inline-block;
+        position: relative;
+        background-color:#FFF;
+        border-radius: 2rem;
+        padding:3px;
+      }
+      [type=checkbox]:checked + span:before {
+        content: "\e5ca";
+        position: absolute;
+        top: -4px;
+        left: -3px;
+        font-size: 33px;
+        color:block;
+      }
+      .custom-radio {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid black;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      input[type="radio"]:checked + .custom-radio {
+        background-color: black;
+        border-color: black;
+      }
     }
+
     p {
       margin: 15px 0 0 18px;
+    }
+    &-btns {
+      display: flex;
+      justify-content: right;
+      &-secure:not(:last-child) {
+        margin: 0 -5px 0 0;
+      }
     }
   }
 }
