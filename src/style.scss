@@ -137,11 +137,11 @@
   }
 
   .notes {
-    width: 240px;
-    height: 125px;
+    width: 250px;
     border-radius: 20px;
     background: #fff;
-    margin: 0 0 0 1rem;
+    margin-left: 1rem;
+    overflow-wrap: break-word;
     &-check-btns {
       display: flex;
       justify-content: space-between;
@@ -180,8 +180,16 @@
       }
     }
 
-    p {
-      margin: 15px 0 0 18px;
+    .text {
+      margin: 15px 18px 0 18px;
+      max-width: 240px;
+    }
+    .text[contentEditable] {
+      padding: 5px 10px 5px 10px;
+      margin-right: 1rem;
+      border-radius: 5px;
+      background-color: $secondColor;
+      outline: none;
     }
     &-btns {
       display: flex;

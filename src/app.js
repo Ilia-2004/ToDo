@@ -7,7 +7,7 @@ const hintSearch = document.querySelector(".hint");
 const mainHeaderSearch = document.querySelector(".main-header-search");
 const searchInputHeader = document.querySelector(".main-header-search-input");
 const btnCloseSearch = document.querySelector("#btn-close-search");
-// const form menu
+// const from menu
 const menu = document.querySelector(".menu");
 const menuBtn = document.querySelector(".btn-menu");
 const menuPages = document.querySelector("#menu-pages");
@@ -17,6 +17,9 @@ const textBtn = document.querySelectorAll(".text-btn");
 const fields = document.querySelectorAll(".field");
 const fieldInput = document.querySelector(".main-field-add-input");
 const btnCloseField = document.querySelector("#btn-close-field");
+// const from notes 
+const text = document.querySelectorAll(".text");
+const editBtn = document.querySelectorAll(".edit");
 
 /* header */
 // for hover on search
@@ -105,3 +108,22 @@ function changeMenu(widthMenu, widthBtn, background, display) {
     btn.style.display = `${display}`;
   });
 }
+
+/* edit btn */
+for (let i = 0; i < editBtn.length; i++) {
+  let editMode = false;
+
+  editBtn[i].addEventListener("click", () => {
+    if (editMode) {
+      text[i].removeAttribute('contentEditable');
+    }
+    else {
+      text[i].setAttribute('contentEditable', true);
+      text[i].focus();
+    }
+
+    editMode = !editMode;
+  });
+
+}
+
