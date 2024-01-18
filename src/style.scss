@@ -3,17 +3,17 @@
 
 /* fonts */
 @font-face {
-  font-family: 'Inter Tight';
-  src: url('/src/fonts/InterTight-Regular.eot');
-  src: local('Inter Tight Regular'), local('InterTight-Regular'),
-  url('/src/fonts/InterTight-Regular.eot?#iefix') format('embedded-opentype'),
-  url('/src/fonts/InterTight-Regular.woff2') format('woff2'),
-  url('/src/fonts/InterTight-Regular.woff') format('woff'),
-  url('/src/fonts/InterTight-Regular.ttf') format('truetype');
+  font-family: 'Inter';
+  src: url('/src/fonts/Inter-Regular.eot');
+  src: local('Inter Regular'), local('Inter-Regular'),
+      url('/src/fonts/Inter-Regular.eot?#iefix') format('embedded-opentype'),
+      url('/src/fonts/Inter-Regular.woff2') format('woff2'),
+      url('/src/fonts/Inter-Regular.woff') format('woff'),
+      url('/src/fonts/Inter-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
 }
+
 
 /* style of header */
 .main-header {
@@ -148,7 +148,7 @@
       label input {
       display: none;
       }
-      label span {
+      .custom-checkbox {
         height: 20px;
         width: 20px;
         border: 4px solid black;
@@ -158,7 +158,7 @@
         border-radius: 2rem;
         padding:3px;
       }
-      [type=checkbox]:checked + span:before {
+      .notes-check-btns-checkbox input[type=checkbox]:checked + span:before {
         content: "\e5ca";
         position: absolute;
         top: -4px;
@@ -174,7 +174,7 @@
         border-radius: 50%;
         cursor: pointer;
       }
-      input[type="radio"]:checked + .custom-radio {
+      .notes-check-btns-radio input[type=checkbox]:checked + .custom-radio {
         background-color: black;
         border-color: black;
       }
