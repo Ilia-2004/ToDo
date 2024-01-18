@@ -102,7 +102,7 @@
             <button class="btn main-field-btn">
               <img src="img/icon_list.svg" alt="list" />
             </button>
-            <button class="btn main-field-btn">
+            <button id="btn-create-notes" class="btn main-field-btn">
               <img src="img/icon_check.svg" alt="add" />
             </button>
             <button id="btn-close-field" class="btn main-field-btn">
@@ -110,6 +110,23 @@
             </button>
           </div>
         </div>
+        <div class="main-field-notes">
+          <div id="main-field-fixed">
+            <p>Закреплённые</p>
+            <div class="main-field-fixed-items"></div>
+          </div>
+          <div id="main-field-notes">
+
+            <!-- hint -->
+            <span class="hint">
+              <img src="img/main_icon_page.svg" alt="hint-icon" />
+              <p>Здесь будут ваши заметки</p>
+            </span>
+          </div>
+          
+        </div>
+
+
         <div class="notes">
           <div class="notes-check-btns">
             <label class="notes-check-btns-checkbox">
@@ -121,16 +138,18 @@
               <span class="custom-radio"></span>
             </label>
           </div>
-          <p class="text">Text</p>
+          <p class="text"></p>
           <div class="notes-btns">
             <button class="edit notes-btns-secure">
-              <img src="img/border_color.svg" alt="edit" />
+              <img src="./img/border_color.svg" alt="edit" />
             </button>
             <button class="notes-btns-secure">
-              <img src="img/cancel.svg" alt="cancel" />
+              <img src="./img/cancel.svg" alt="cancel" />
             </button>
-          </div>
+          </div>   
         </div>
+        
+        <!-- hint -->
         <span class="hint">
           <img src="img/main_icon_page.svg" alt="hint-icon" />
           <p>Здесь будут ваши заметки</p>

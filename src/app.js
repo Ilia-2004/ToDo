@@ -3,7 +3,6 @@ import "./style.scss";
 
 /* const's */
 // const form header
-const hintSearch = document.querySelector(".hint");
 const mainHeaderSearch = document.querySelector(".main-header-search");
 const searchInputHeader = document.querySelector(".main-header-search-input");
 const btnCloseSearch = document.querySelector("#btn-close-search");
@@ -17,31 +16,29 @@ const textBtn = document.querySelectorAll(".text-btn");
 const fields = document.querySelectorAll(".field");
 const fieldInput = document.querySelector(".main-field-add-input");
 const btnCloseField = document.querySelector("#btn-close-field");
+const btnCreateNotes = document.querySelector("#btn-create-notes");
+const fieldNotes = document.querySelector("#main-field-notes");
 // const from notes 
+const hint = document.querySelector(".hint");
+const notes = document.querySelectorAll(".notes");
 const text = document.querySelectorAll(".text");
 const editBtn = document.querySelectorAll(".edit");
 
 /* header */
 // for hover on search
-mainHeaderSearch.addEventListener("mouseover", () => {
-  hintSearch.style.transition = "opacity 0.3s ease-out";
-  hintSearch.style.opacity = "1";
-});
-mainHeaderSearch.addEventListener("mouseout", () => {
-  removeHint();
-});
-
-// hint from click input
-searchInputHeader.addEventListener("click", () => {
-  removeHint();
-});
+// mainHeaderSearch.addEventListener("mouseover", () => {
+//   hintSearch.style.transition = "opacity 0.3s ease-out";
+//   hintSearch.style.opacity = "1";
+// });
+// mainHeaderSearch.addEventListener("mouseout", () => {
+//   removeHint();
+// });
 
 // add button close on search
 searchInputHeader.addEventListener("input", () => {
   if (searchInputHeader.value.length !== 0) {
     btnCloseSearch.style.display = "block";
     mainHeaderSearch.style.padding = "0 0 0 0";
-    removeHint();
   } else {
     btnCloseSearch.style.display = "none";
     mainHeaderSearch.style.padding = "0 54px 0 0";
@@ -92,11 +89,35 @@ btnCloseField.addEventListener("click", () => {
   fieldInput.value = "";
 });
 
-// helpers functions
-function removeHint() {
-  hintSearch.style.transition = "none";
-  hintSearch.style.opacity = "0";
+
+/* edit btn */
+for (let i = 0; i < editBtn.length; i++) {
+  let editMode = false;
+  
+  editBtn[i].addEventListener("click", () => {
+    if (editMode) {
+      text[i].removeAttribute('contentEditable');
+    }
+    else {
+      text[i].setAttribute('contentEditable', true);
+      text[i].focus();
+    }
+    
+    editMode = !editMode;
+  });
 }
+
+btnCreateNotes.addEventListener("click", () => {
+  let note = document.createElement('div');
+  note.className = 'notes';
+  note.innerHTMLS = createNotes();
+  fieldNotes.appendChild(note);
+})
+
+notes.forEach((e) => {
+  if (e.offsetParent !== null)
+    hint.style.display = "none";
+})
 
 function changeMenu(widthMenu, widthBtn, background, display) {
   menu.style.width = `${widthMenu}px`;
@@ -109,21 +130,24 @@ function changeMenu(widthMenu, widthBtn, background, display) {
   });
 }
 
-/* edit btn */
-for (let i = 0; i < editBtn.length; i++) {
-  let editMode = false;
-
-  editBtn[i].addEventListener("click", () => {
-    if (editMode) {
-      text[i].removeAttribute('contentEditable');
-    }
-    else {
-      text[i].setAttribute('contentEditable', true);
-      text[i].focus();
-    }
-
-    editMode = !editMode;
-  });
-
+function createNotes() {
+  return `<div class="notes-check-btns">
+  <label class="notes-check-btns-checkbox">
+    <input type="checkbox" />
+    <span class="custom-checkbox material-symbols-outlined"></span>
+  </label>
+  <label class="notes-check-btns-radio">
+    <input type="checkbox" />
+    <span class="custom-radio"></span>
+  </label>
+  </div>
+  <p class="text"></p>
+  <div class="notes-btns">
+    <button class="edit notes-btns-secure">
+      <img src="./img/border_color.svg" alt="edit" />
+    </button>
+    <button class="notes-btns-secure">
+      <img src="./img/cancel.svg" alt="cancel" />
+    </button>
+  </div>`
 }
-
