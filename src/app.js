@@ -17,7 +17,7 @@ const fields = document.querySelectorAll(".field");
 const fieldInput = document.querySelector(".main-field-add-input");
 const btnCloseField = document.querySelector("#btn-close-field");
 const btnCreateNotes = document.querySelector("#btn-create-notes");
-const fieldNotes = document.querySelector("#main-field-notes");
+const fieldNotes = document.getElementById("main-field-notes");
 // const from notes 
 const hint = document.querySelector(".hint");
 const notes = document.querySelectorAll(".notes");
@@ -25,15 +25,6 @@ const text = document.querySelectorAll(".text");
 const editBtn = document.querySelectorAll(".edit");
 
 /* header */
-// for hover on search
-// mainHeaderSearch.addEventListener("mouseover", () => {
-//   hintSearch.style.transition = "opacity 0.3s ease-out";
-//   hintSearch.style.opacity = "1";
-// });
-// mainHeaderSearch.addEventListener("mouseout", () => {
-//   removeHint();
-// });
-
 // add button close on search
 searchInputHeader.addEventListener("input", () => {
   if (searchInputHeader.value.length !== 0) {
@@ -84,12 +75,6 @@ menuPages.addEventListener("click", (event) => {
 });
 
 /* field */
-// button close
-btnCloseField.addEventListener("click", () => {
-  fieldInput.value = "";
-});
-
-
 /* edit btn */
 for (let i = 0; i < editBtn.length; i++) {
   let editMode = false;
@@ -105,19 +90,26 @@ for (let i = 0; i < editBtn.length; i++) {
     
     editMode = !editMode;
   });
-}
-
-btnCreateNotes.addEventListener("click", () => {
-  let note = document.createElement('div');
-  note.className = 'notes';
-  note.innerHTMLS = createNotes();
-  fieldNotes.appendChild(note);
-})
+};
 
 notes.forEach((e) => {
   if (e.offsetParent !== null)
     hint.style.display = "none";
+});
+
+btnCreateNotes.addEventListener("click", () => {
+  var note = document.createElement('div');
+  note.className = 'notes';
+  note.style.display = "block";
+  note.innerHTML = createNotes();
+  document.querySelector('#main-field-notes').appendChild(note);
 })
+
+btnCloseField.addEventListener("click", () => {
+  fieldInput.value = "";
+});
+
+
 
 function changeMenu(widthMenu, widthBtn, background, display) {
   menu.style.width = `${widthMenu}px`;
