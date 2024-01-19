@@ -72,7 +72,7 @@ a {
 abbr[title] {
   border-bottom: none; /* 1 */
   text-decoration: underline; /* 2 */
-  text-decoration: underline dotted; /* 2 */
+  /* 2 */
 }
 
 /**
@@ -318,9 +318,15 @@ template {
   transition: all 0.1s;
 }
 
+html, main, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 main {
   display: flex;
-  height: 90vh;
 }
 
 button {
@@ -348,14 +354,84 @@ button {
   transition: 0.2s;
 }
 
+#list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+}
+
+.notes {
+  margin-bottom: 1rem;
+  width: 250px;
+  list-style-type: none;
+  border-radius: 20px;
+  background: #fff;
+  margin-left: 1rem;
+  overflow-wrap: break-word;
+}
+.notes-check-btns {
+  display: flex;
+  justify-content: space-between;
+}
+.notes-check-btns label input {
+  display: none;
+}
+.notes-check-btns .custom-checkbox {
+  height: 20px;
+  width: 20px;
+  border: 4px solid black;
+  display: inline-block;
+  position: relative;
+  background-color: #FFF;
+  border-radius: 2rem;
+  padding: 3px;
+}
+.notes-check-btns .notes-check-btns-checkbox input[type=checkbox]:checked + span:before {
+  content: "\e5ca";
+  position: absolute;
+  top: -4px;
+  left: -3px;
+  font-size: 33px;
+  color: block;
+}
+.notes-check-btns .custom-radio {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.notes-check-btns .notes-check-btns-radio input[type=checkbox]:checked + .custom-radio {
+  background-color: black;
+  border-color: black;
+}
+.notes .text {
+  margin: 15px 18px 0 18px;
+  max-width: 240px;
+}
+.notes .text[contentEditable] {
+  padding: 5px 10px 5px 10px;
+  margin-right: 1rem;
+  border-radius: 5px;
+  background-color: #efefef;
+  outline: none;
+}
+.notes-btns {
+  display: flex;
+  justify-content: right;
+}
+.notes-btns-secure:not(:last-child) {
+  margin: 0 -5px 0 0;
+}
+
 /* fonts */
 @font-face {
-  font-family: "Inter Tight";
-  src: url("/src/fonts/InterTight-Regular.eot");
-  src: local("Inter Tight Regular"), local("InterTight-Regular"), url("/src/fonts/InterTight-Regular.eot?#iefix") format("embedded-opentype"), url("/src/fonts/InterTight-Regular.woff2") format("woff2"), url("/src/fonts/InterTight-Regular.woff") format("woff"), url("/src/fonts/InterTight-Regular.ttf") format("truetype");
+  font-family: "Inter";
+  src: url("/src/fonts/Inter-Regular.eot");
+  src: local("Inter Regular"), local("Inter-Regular"), url("/src/fonts/Inter-Regular.eot?#iefix") format("embedded-opentype"), url("/src/fonts/Inter-Regular.woff2") format("woff2"), url("/src/fonts/Inter-Regular.woff") format("woff"), url("/src/fonts/Inter-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
 }
 /* style of header */
 .main-header {
@@ -468,6 +544,12 @@ button {
   padding: 10px;
   margin: 0 10px 0 0;
 }
+.main-field #main-field-fixed {
+  margin: 1rem 1rem 1rem 1rem;
+}
+.main-field #main-field-notes {
+  border: 1px solid #000;
+}
 .main-field .hint {
   width: 450px;
   margin: 120px auto 0;
@@ -477,60 +559,6 @@ button {
   font-size: 25px;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.2);
-}
-.main-field .notes {
-  width: 240px;
-  height: 125px;
-  border-radius: 20px;
-  background: #fff;
-  margin: 0 0 0 1rem;
-}
-.main-field .notes-check-btns {
-  display: flex;
-  justify-content: space-between;
-}
-.main-field .notes-check-btns label input {
-  display: none;
-}
-.main-field .notes-check-btns label span {
-  height: 20px;
-  width: 20px;
-  border: 4px solid black;
-  display: inline-block;
-  position: relative;
-  background-color: #FFF;
-  border-radius: 2rem;
-  padding: 3px;
-}
-.main-field .notes-check-btns [type=checkbox]:checked + span:before {
-  content: "\e5ca";
-  position: absolute;
-  top: -4px;
-  left: -3px;
-  font-size: 33px;
-  color: block;
-}
-.main-field .notes-check-btns .custom-radio {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid black;
-  border-radius: 50%;
-  cursor: pointer;
-}
-.main-field .notes-check-btns input[type=radio]:checked + .custom-radio {
-  background-color: black;
-  border-color: black;
-}
-.main-field .notes p {
-  margin: 15px 0 0 18px;
-}
-.main-field .notes-btns {
-  display: flex;
-  justify-content: right;
-}
-.main-field .notes-btns-secure:not(:last-child) {
-  margin: 0 -5px 0 0;
 }
 
 /* important field */
