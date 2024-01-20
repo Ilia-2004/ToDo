@@ -52,6 +52,17 @@ menuBtn.addEventListener("click", () => {
   else changeMenu(280, 180, "fff", "block");
 });
 
+function changeMenu(widthMenu, widthBtn, background, display) {
+  menu.style.width = `${widthMenu}px`;
+  menu.style.background = `#${background}`;
+  btnMenuPages.forEach((btn) => {
+    btn.style.width = `${widthBtn}px`;
+  });
+  textBtn.forEach((btn) => {
+    btn.style.display = `${display}`;
+  });
+}
+
 // switch between pages
 menuPages.addEventListener("click", (event) => {
   const buttonField = event.target.closest("button");
@@ -77,6 +88,8 @@ menuPages.addEventListener("click", (event) => {
 });
 
 /* field */
+const notesArray = [];
+
 btnCloseField.addEventListener("click", () => {
   fieldInput.value = "";
 });
@@ -97,71 +110,73 @@ for (let i = 0; i < editBtn.length; i++) {
   });
 }
 
+function render() {
+  listElement.innerHTML = "";
+  if (notesArray.length === 0) {
+    listElement.innerHTML = `
+        <span class="hint">
+          <img src="img/main_icon_page.svg" alt="hint-icon" />
+          <p>Здесь будут ваши заметки</p>
+        </span>
+    `;
+  }
+  for (let i = 0; i < notesArray.length; i++)
+    listElement.insertAdjacentHTML("beforeend", createNotes(notesArray[i], i));
+}
+render();
+
 blockNotes.forEach((e) => {
   if (e.offsetParent !== null) hint.style.display = "none";
 });
 
 btnCreateNotes.addEventListener("click", () => {
-  if (inputElement.value.length !== 0) {
-    listElement.insertAdjacentHTML(
-      "beforeend",
-      `
-      <li class="notes">
+  if (inputElement.value.length === 0) return;
+  const newNote = {
+    title: `${inputElement.value}`,
+    completed: false,
+  };
+  notesArray.push(newNote);
+  render();
+  inputElement.value = "";
+});
+
+listElement.addEventListener("click", (e) => {
+  if (e.target.dataset.index) {
+    const index = +e.target.dataset.index;
+    const type = e.target.dataset.type;
+
+    if (type === "toggle") {
+      notesArray[index].completed = !notesArray[index].completed;
+    } else if (type === "remove") {
+      notesArray.splice(index, 1);
+    }
+  }
+
+  render();
+});
+
+function createNotes(note, index) {
+  return `<li class="notes">
        <div class="notes-check-btns">
          <label class="notes-check-btns-checkbox">
-           <input type="checkbox" />
-           <span class="custom-checkbox material-symbols-outlined"></span>
+           <input type="checkbox" ${note.completed ? "checked" : ""}/>
+           <span class="custom-checkbox material-symbols-outlined" data-type="toggle" data-index="${index}"></span>
          </label>
          <label class="notes-check-btns-radio">
            <input type="checkbox" />
            <span class="custom-radio"></span>
          </label>
        </div>
-       <p class="text">${inputElement.value}</p>
+       <p style="${
+         note.completed ? "text-decoration: line-through;" : ""
+       }" class="text">${note.title}</p>
        <div class="notes-btns">
          <button class="edit notes-btns-secure">
-           <img src="./img/border_color.svg" alt="edit" />
+           <img src="./src/img/border_color.svg" alt="edit" />
          </button>
-         <button class="notes-btns-secure">
-           <img src="./img/cancel.svg" alt="cancel" />
+         <button class="notes-btns-secure" data-type="remove" data-index="${index}">
+           <img src="img/cancel.svg" alt="remove" data-type="remove" data-index="${index}" />
          </button>
        </div>
-     </li>`,
-    );
-    inputElement.value = "";
-  }
-});
-
-/* support functions */
-function changeMenu(widthMenu, widthBtn, background, display) {
-  menu.style.width = `${widthMenu}px`;
-  menu.style.background = `#${background}`;
-  btnMenuPages.forEach((btn) => {
-    btn.style.width = `${widthBtn}px`;
-  });
-  textBtn.forEach((btn) => {
-    btn.style.display = `${display}`;
-  });
+     </li>`;
 }
-
-// function createNotes() {
-//   return `<div class="notes-check-btns">
-//   <label class="notes-check-btns-checkbox">
-//     <input type="checkbox" />
-//     <span class="custom-checkbox material-symbols-outlined"></span>
-//   </label>
-//   <label class="notes-check-btns-radio">
-//     <input type="checkbox" />
-//     <span class="custom-radio"></span>
-//   </label>
-//   </div>
-//   <p class="text"></p>
-//   <div class="notes-btns">
-//     <button class="edit notes-btns-secure">
-//       <img src="img/border_color.svg" alt="edit" />
-//     </button>
-//     <button class="notes-btns-secure">
-//       <img src="img/cancel.svg" alt="cancel" />
-//     </button>
-//   </div>`;
-// }
