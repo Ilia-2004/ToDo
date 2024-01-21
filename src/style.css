@@ -314,7 +314,9 @@ template {
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   transition: all 0.1s;
 }
 
@@ -546,6 +548,7 @@ button {
 }
 .main-field #main-field-fixed {
   margin: 1rem 1rem 1rem 1rem;
+  display: none;
 }
 .main-field #main-field-notes {
   border: 1px solid #000;
@@ -574,6 +577,4 @@ button {
 /* reminders field */
 .reminders-field {
   display: none;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

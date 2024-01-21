@@ -19,10 +19,12 @@ const fieldInput = document.querySelector(".main-field-add-input");
 const btnCloseField = document.querySelector("#btn-close-field");
 const btnCreateNotes = document.querySelector("#btn-create-notes");
 // const from notes
-const hint = document.querySelector(".hint");
+// const hint = document.querySelector(".hint");
 const inputElement = document.querySelector(".main-field-add-input");
 const listElement = document.querySelector("#list");
-const blockNotes = document.querySelectorAll(".notes");
+const mainFieldFixed = document.querySelector("#main-field-fixed");
+const listElementFixed = document.querySelectorAll("#list-fixed");
+// const blockNotes = document.querySelectorAll(".notes");
 const text = document.querySelectorAll(".text");
 const editBtn = document.querySelectorAll(".edit");
 
@@ -88,8 +90,6 @@ menuPages.addEventListener("click", (event) => {
 });
 
 /* field */
-const notesArray = [];
-
 btnCloseField.addEventListener("click", () => {
   fieldInput.value = "";
 });
@@ -110,8 +110,12 @@ for (let i = 0; i < editBtn.length; i++) {
   });
 }
 
+const notesArray = [];
+const notesArrayFixed = [];
+
 function render() {
   listElement.innerHTML = "";
+  if (notesArrayFixed.length !== 0) mainFieldFixed.style.display = "block";
   if (notesArray.length === 0) {
     listElement.innerHTML = `
         <span class="hint">
@@ -125,15 +129,12 @@ function render() {
 }
 render();
 
-blockNotes.forEach((e) => {
-  if (e.offsetParent !== null) hint.style.display = "none";
-});
-
 btnCreateNotes.addEventListener("click", () => {
   if (inputElement.value.length === 0) return;
   const newNote = {
     title: `${inputElement.value}`,
     completed: false,
+    fixed: false,
   };
   notesArray.push(newNote);
   render();
@@ -145,13 +146,15 @@ listElement.addEventListener("click", (e) => {
     const index = +e.target.dataset.index;
     const type = e.target.dataset.type;
 
-    if (type === "toggle") {
+    if (type === "toggle")
       notesArray[index].completed = !notesArray[index].completed;
-    } else if (type === "remove") {
+    else if (type === "remove") notesArray.splice(index, 1);
+    else if (type === "fixed") {
+      notesArray[index].fixed = true;
+      notesArrayFixed.push(notesArray[index]);
       notesArray.splice(index, 1);
     }
   }
-
   render();
 });
 
@@ -163,8 +166,8 @@ function createNotes(note, index) {
            <span class="custom-checkbox material-symbols-outlined" data-type="toggle" data-index="${index}"></span>
          </label>
          <label class="notes-check-btns-radio">
-           <input type="checkbox" />
-           <span class="custom-radio"></span>
+           <input type="checkbox" ${note.fised ? "checked" : ""}/>
+           <span class="custom-radio" data-type="fixed" data-idex="${index}"></span>
          </label>
        </div>
        <p style="${

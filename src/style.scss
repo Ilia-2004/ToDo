@@ -3,17 +3,18 @@
 
 /* fonts */
 @font-face {
-  font-family: 'Inter';
-  src: url('/src/fonts/Inter-Regular.eot');
-  src: local('Inter Regular'), local('Inter-Regular'),
-      url('/src/fonts/Inter-Regular.eot?#iefix') format('embedded-opentype'),
-      url('/src/fonts/Inter-Regular.woff2') format('woff2'),
-      url('/src/fonts/Inter-Regular.woff') format('woff'),
-      url('/src/fonts/Inter-Regular.ttf') format('truetype');
+  font-family: "Inter";
+  src: url("/src/fonts/Inter-Regular.eot");
+  src:
+    local("Inter Regular"),
+    local("Inter-Regular"),
+    url("/src/fonts/Inter-Regular.eot?#iefix") format("embedded-opentype"),
+    url("/src/fonts/Inter-Regular.woff2") format("woff2"),
+    url("/src/fonts/Inter-Regular.woff") format("woff"),
+    url("/src/fonts/Inter-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
-
 
 /* style of header */
 .main-header {
@@ -83,11 +84,11 @@
       background: $firstColor;
     }
     &-content {
-       margin-left: 1.4rem;
-       display: flex;
-       align-items: center;
-       pointer-events: none;
-     }
+      margin-left: 1.4rem;
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+    }
     &-content p {
       margin: 0 0 0 10px;
       font-size: 15px;
@@ -127,6 +128,7 @@
   }
   #main-field-fixed {
     margin: 1rem 1rem 1rem 1rem;
+    display: none;
   }
   #main-field-notes {
     border: 1px solid #000;
