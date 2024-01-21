@@ -48,8 +48,25 @@ button {
 
 #list {
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   margin-top: 2.5rem;
+}
+
+#list-fixed {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+#hint {
+  width: 450px;
+  margin: 40px auto 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 25px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.2);
 }
 
 .notes {

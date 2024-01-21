@@ -127,21 +127,11 @@
     margin: 0 10px 0 0;
   }
   #main-field-fixed {
-    margin: 1rem 1rem 1rem 1rem;
     display: none;
-  }
-  #main-field-notes {
-    border: 1px solid #000;
-  }
-  .hint {
-    width: 450px;
-    margin: 120px auto 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    font-size: 25px;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.2);
+    margin: 1rem 1rem 1rem 1rem;
+    p {
+      margin-left: 1rem;
+    }
   }
 }
 

@@ -112,7 +112,51 @@
           <p>Закреплённые</p>
           <ul id="list-fixed"></ul>
         </div>
-        <ul id="list"></ul>
+        <ul id="list">
+          <li class="notes">
+            <div class="notes-check-btns">
+              <label class="notes-check-btns-checkbox">
+                <input type="checkbox" />
+                <span
+                  class="custom-checkbox material-symbols-outlined"
+                  data-type="toggle"
+                  data-index="${index}"
+                ></span>
+              </label>
+              <label class="notes-check-btns-radio">
+                <input type="checkbox" />
+                <span
+                  class="custom-radio"
+                  data-type="fixed"
+                  data-idex="${index}"
+                ></span>
+              </label>
+            </div>
+            <p></p>
+            <div class="notes-btns">
+              <button class="edit notes-btns-secure">
+                <img src="./img/border_color.svg" alt="edit" />
+              </button>
+              <button
+                class="notes-btns-secure"
+                data-type="remove"
+                data-index="${index}"
+              >
+                <img
+                  src="./img/cancel.svg"
+                  alt="remove"
+                  data-type="remove"
+                  data-index="${index}"
+                />
+              </button>
+            </div>
+          </li>
+
+          <span style="display: none" id="hint">
+            <img src="./img/main_icon_page.svg" alt="hint-icon" />
+            <p>Здесь будут ваши заметки</p>
+          </span>
+        </ul>
       </div>
 
       <div class="field important-field" data-id="2"></div>

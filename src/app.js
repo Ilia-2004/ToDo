@@ -23,10 +23,7 @@ const btnCreateNotes = document.querySelector("#btn-create-notes");
 const inputElement = document.querySelector(".main-field-add-input");
 const listElement = document.querySelector("#list");
 const mainFieldFixed = document.querySelector("#main-field-fixed");
-const listElementFixed = document.querySelectorAll("#list-fixed");
-// const blockNotes = document.querySelectorAll(".notes");
-const text = document.querySelectorAll(".text");
-const editBtn = document.querySelectorAll(".edit");
+const listElementFixed = document.querySelector("#list-fixed");
 
 /* header */
 // add button close on search
@@ -94,53 +91,51 @@ btnCloseField.addEventListener("click", () => {
   fieldInput.value = "";
 });
 
-// edit btn
-for (let i = 0; i < editBtn.length; i++) {
-  let editMode = false;
-
-  editBtn[i].addEventListener("click", () => {
-    if (editMode) {
-      text[i].removeAttribute("contentEditable");
-    } else {
-      text[i].setAttribute("contentEditable", true);
-      text[i].focus();
-    }
-
-    editMode = !editMode;
-  });
-}
-
+// arrays from notes
 const notesArray = [];
 const notesArrayFixed = [];
 
+// function for render notes
 function render() {
   listElement.innerHTML = "";
-  if (notesArrayFixed.length !== 0) mainFieldFixed.style.display = "block";
+  listElementFixed.innerHTML = "";
+  if (notesArrayFixed.length !== 0) {
+    mainFieldFixed.style.display = "block";
+  }
   if (notesArray.length === 0) {
     listElement.innerHTML = `
-        <span class="hint">
-          <img src="img/main_icon_page.svg" alt="hint-icon" />
-          <p>Здесь будут ваши заметки</p>
-        </span>
+          <span id="hint">
+            <img src="./img/main_icon_page.svg" alt="hint-icon" />
+            <p>Здесь будут ваши заметки</p>
+          </span>
     `;
   }
   for (let i = 0; i < notesArray.length; i++)
     listElement.insertAdjacentHTML("beforeend", createNotes(notesArray[i], i));
+
+  for (let i = 0; i < notesArrayFixed.length; i++)
+    listElementFixed.insertAdjacentHTML(
+      "beforeend",
+      createNotes(notesArrayFixed[i], i),
+    );
 }
 render();
 
+// button of create note
 btnCreateNotes.addEventListener("click", () => {
   if (inputElement.value.length === 0) return;
   const newNote = {
     title: `${inputElement.value}`,
     completed: false,
-    fixed: false,
+    fix: false,
+    edit: false,
   };
   notesArray.push(newNote);
   render();
   inputElement.value = "";
 });
 
+// event of buttons for note
 listElement.addEventListener("click", (e) => {
   if (e.target.dataset.index) {
     const index = +e.target.dataset.index;
@@ -150,14 +145,33 @@ listElement.addEventListener("click", (e) => {
       notesArray[index].completed = !notesArray[index].completed;
     else if (type === "remove") notesArray.splice(index, 1);
     else if (type === "fixed") {
-      notesArray[index].fixed = true;
+      notesArray[index].fix = true;
       notesArrayFixed.push(notesArray[index]);
       notesArray.splice(index, 1);
+    } else if (type === "edit") {
+      notesArray[index].edit = !notesArray[index].edit;
     }
   }
   render();
 });
 
+// // edit btn
+// for (let i = 0; i < editBtn.length; i++) {
+//   let editMode = false;
+//
+//   editBtn[i].addEventListener("click", () => {
+//     if (editMode) {
+//       text[i].removeAttribute("contentEditable");
+//     } else {
+//       text[i].setAttribute("contentEditable", true);
+//       text[i].focus();
+//     }
+//
+//     editMode = !editMode;
+//   });
+// }
+
+// supported method for create note
 function createNotes(note, index) {
   return `<li class="notes">
        <div class="notes-check-btns">
@@ -166,19 +180,19 @@ function createNotes(note, index) {
            <span class="custom-checkbox material-symbols-outlined" data-type="toggle" data-index="${index}"></span>
          </label>
          <label class="notes-check-btns-radio">
-           <input type="checkbox" ${note.fised ? "checked" : ""}/>
-           <span class="custom-radio" data-type="fixed" data-idex="${index}"></span>
+           <input type="checkbox" ${note.fix ? "checked" : ""}/>
+           <span class="custom-radio" data-type="fixed" data-index="${index}"></span>
          </label>
        </div>
        <p style="${
          note.completed ? "text-decoration: line-through;" : ""
-       }" class="text">${note.title}</p>
+       }" class="text" ${note.edit ? "contentEditable" : ""}>${note.title}</p>
        <div class="notes-btns">
-         <button class="edit notes-btns-secure">
-           <img src="./src/img/border_color.svg" alt="edit" />
+         <button class="edit notes-btns-secure" data-type="edit" data-index="${index}">
+           <img src="./img/border_color.svg" alt="edit" data-type="edit" data-index="${index}"/>
          </button>
          <button class="notes-btns-secure" data-type="remove" data-index="${index}">
-           <img src="img/cancel.svg" alt="remove" data-type="remove" data-index="${index}" />
+           <img src="./img/cancel.svg" alt="remove" data-type="remove" data-index="${index}" />
          </button>
        </div>
      </li>`;

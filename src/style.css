@@ -314,9 +314,7 @@ template {
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
   transition: all 0.1s;
 }
 
@@ -360,6 +358,23 @@ button {
   display: flex;
   flex-wrap: wrap;
   margin-top: 2.5rem;
+}
+
+#list-fixed {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+#hint {
+  width: 450px;
+  margin: 40px auto 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 25px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.2);
 }
 
 .notes {
@@ -547,21 +562,11 @@ button {
   margin: 0 10px 0 0;
 }
 .main-field #main-field-fixed {
-  margin: 1rem 1rem 1rem 1rem;
   display: none;
+  margin: 1rem 1rem 1rem 1rem;
 }
-.main-field #main-field-notes {
-  border: 1px solid #000;
-}
-.main-field .hint {
-  width: 450px;
-  margin: 120px auto 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  font-size: 25px;
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.2);
+.main-field #main-field-fixed p {
+  margin-left: 1rem;
 }
 
 /* important field */
@@ -577,4 +582,6 @@ button {
 /* reminders field */
 .reminders-field {
   display: none;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
