@@ -1,8 +1,8 @@
-/* base style */
-
+/* цвета */
 $firstColor: #e1e8f1;
 $secondColor: #efefef;
 
+/* стили для главных блоков */
 * {
   margin: 0;
   padding: 0;
@@ -29,6 +29,7 @@ button {
   cursor: pointer;
 }
 
+/* стилизация полей и элементов на ней */
 .field {
   width: 100%;
   height: 100%;

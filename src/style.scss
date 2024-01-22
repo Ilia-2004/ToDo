@@ -1,7 +1,7 @@
 @import "libs/normalize";
 @import "style/__base";
 
-/* fonts */
+/* шрифты */
 @font-face {
   font-family: "Inter";
   src: url("/src/fonts/Inter-Regular.eot");
@@ -16,7 +16,7 @@
   font-style: normal;
 }
 
-/* style of header */
+/* стили header */
 .main-header {
   display: flex;
   height: 64px;
@@ -55,7 +55,7 @@
   }
 }
 
-/* style of menu */
+/* стили меню */
 .menu {
   width: 280px;
   height: 100%;
@@ -96,7 +96,7 @@
   }
 }
 
-/* style of fields */
+/* стили полей */
 /* main field */
 .main-field {
   background: $secondColor;

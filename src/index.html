@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- additional data -->
+    <!-- дополнительные данные -->
     <meta name="keywords" content="ToDo, plan, task, задача, план" />
     <meta
       name="description"
       content="This is an application for making a plan of the day |
             Это приложение для составления плана дня"
     />
-    <!-- icon -->
+    <!-- иконка -->
     <link rel="shortcut icon" href="img/check_circle.svg" />
-    <!-- fonts -->
+    <!-- шрифты -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
@@ -20,38 +20,44 @@
     <title>ToDo</title>
   </head>
   <body>
-    <!-- header -->
+    <!-- Header -->
     <header class="main-header">
-      <!-- logo -->
+      <!-- логотип -->
       <img class="main-header-logo" src="img/Logo.svg" alt="logo" />
-      <!-- search -->
+      <!-- поиск по заметкам -->
       <div class="main-header-search">
+        <!-- картика поиска -->
         <img
           class="main-header-search-icon"
           src="img/search.svg"
           alt="search"
         />
+        <!-- строка ввода поиска -->
         <input
           class="main-header-search-input"
           type="text"
           placeholder="Поиск"
         />
+        <!-- кнопка очистки строки ввода -->
         <button id="btn-close-search" class="btn">
           <img src="img/icon_close.svg" alt="close" />
         </button>
       </div>
     </header>
 
-    <!-- main -->
+    <!-- Main -->
     <main>
-      <!-- menu -->
+      <!-- меню -->
       <div class="menu">
+        <!-- кнопка меню -->
         <div>
           <button class="btn-menu">
             <img src="img/menu.svg" alt="menu" />
           </button>
         </div>
+        <!-- кнопки страниц меню -->
         <div id="menu-pages">
+          <!-- страница "Мой день" -->
           <div>
             <button class="btn-menu-pages" data-id="1">
               <span class="btn-menu-content">
@@ -60,6 +66,7 @@
               </span>
             </button>
           </div>
+          <!-- страница "Важно" -->
           <div>
             <button class="btn-menu-pages" data-id="2">
               <span class="btn-menu-content">
@@ -68,6 +75,7 @@
               </span>
             </button>
           </div>
+          <!-- страница "Заметки" -->
           <div>
             <button class="btn-menu-pages" data-id="3">
               <span class="btn-menu-content">
@@ -76,6 +84,7 @@
               </span>
             </button>
           </div>
+          <!-- страница "Напоминания" -->
           <div>
             <button class="btn-menu-pages" data-id="4">
               <span class="btn-menu-content">
@@ -87,34 +96,46 @@
         </div>
       </div>
 
-      <!-- fields -->
-      <!-- main field -->
+      <!-- поля заметок -->
+      <!-- поле "Мой день" -->
       <div class="field main-field" data-id="1">
+        <!-- строка создания заметки -->
         <div class="main-field-add">
+          <!-- поле ввода -->
           <input
             class="main-field-add-input"
             placeholder="Заметки"
             type="text"
           />
+          <!-- кнопки -->
           <div class="main-field-btns">
+            <!-- кнопки создания списка -->
             <button class="btn main-field-btn">
               <img src="img/icon_list.svg" alt="list" />
             </button>
+            <!-- кнопка создания заметки -->
             <button id="btn-create-notes" class="btn main-field-btn">
               <img src="img/icon_check.svg" alt="add" />
             </button>
+            <!-- кнопка очистки поля ввода заметки -->
             <button id="btn-close-field" class="btn main-field-btn">
               <img src="img/icon_close.svg" alt="close" />
             </button>
           </div>
         </div>
+        <!-- блок закреплённых заметок -->
         <div id="main-field-fixed">
           <p>Закреплённые</p>
+          <!-- список закреплённых заметок -->
           <ul id="list-fixed"></ul>
         </div>
+        <!-- список заметок -->
         <ul id="list">
+          <!-- разметка заметки -->
           <li class="notes">
+            <!-- радио-кнопки заметки -->
             <div class="notes-check-btns">
+              <!-- радио-кнопка "Выполнить" -->
               <label class="notes-check-btns-checkbox">
                 <input type="checkbox" />
                 <span
@@ -123,6 +144,7 @@
                   data-index="${index}"
                 ></span>
               </label>
+              <!-- радио-кнопка "Закрепить" -->
               <label class="notes-check-btns-radio">
                 <input type="checkbox" />
                 <span
@@ -132,11 +154,15 @@
                 ></span>
               </label>
             </div>
-            <p></p>
+            <!-- текст заметки -->
+            <p class="text"></p>
+            <!-- кнопки взаимодействия с заметкой -->
             <div class="notes-btns">
+              <!-- кнопка редактирования текста заметки -->
               <button class="edit notes-btns-secure">
                 <img src="./img/border_color.svg" alt="edit" />
               </button>
+              <!-- кнопка удаления заметки -->
               <button
                 class="notes-btns-secure"
                 data-type="remove"
@@ -152,19 +178,21 @@
             </div>
           </li>
 
-          <span style="display: none" id="hint">
+          <!-- фоновое изображение -->
+          <span id="hint">
             <img src="./img/main_icon_page.svg" alt="hint-icon" />
             <p>Здесь будут ваши заметки</p>
           </span>
         </ul>
       </div>
 
+      <!-- поле "Важно" -->
       <div class="field important-field" data-id="2"></div>
 
-      <!-- notes field -->
+      <!-- поле "Заметки" -->
       <div class="field notes-field" data-id="3"></div>
 
-      <!-- reminders field -->
+      <!-- поле "Напоминания" -->
       <div class="field reminders-field" data-id="4"></div>
     </main>
   </body>
