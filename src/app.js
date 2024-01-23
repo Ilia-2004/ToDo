@@ -11,6 +11,8 @@ import "./style.scss";
 const mainHeaderSearch = document.querySelector(".main-header-search");
 // строка ввода текста поиска заметок
 const searchInputHeader = document.querySelector(".main-header-search-input");
+// кнопка поиска
+const btnSearch = document.querySelector("#btn-search");
 // кнопка очистки поля ввода поиска зметок
 const btnCloseSearch = document.querySelector("#btn-close-search");
 
@@ -39,6 +41,8 @@ const btnCreateNotes = document.querySelector("#btn-create-notes");
 /* константы из notes */
 // поле ввода элемента
 const inputElement = document.querySelector(".main-field-add-input");
+// заметки
+const note = document.querySelectorAll(".notes[data-index]");
 // список заметок
 const listElement = document.querySelector("#list");
 // блок закреплённых заметок
@@ -79,6 +83,23 @@ btnCloseSearch.addEventListener("click", () => {
   // установка специального отступа
   mainHeaderSearch.style.padding = "0 54px 0 0";
 });
+
+function searchFuntion (text) {
+  for (let i = 0; i < notesArray.length; i++) {
+    if (notesArray[i].title === text) {
+      note.forEach((e) => {
+        if (notesArray[i] === e.textContent) {
+          console.log("lsjf");
+        }
+      })
+    } 
+  }
+}
+
+btnSearch.addEventListener("click", (e) => {
+  searchFuntion(searchInputHeader.value);
+})
+
 //#endregion
 
 //#region Menu
@@ -164,7 +185,9 @@ function render() {
     // отображаем блок закреплённых заметок
     mainFieldFixed.style.display = "block";
 
+  // если в массиве заметок нет элементов
   if (notesArray.length === 0) {
+    // вывести элемент пустого поля
     listElement.innerHTML = `
           <span id="hint">
             <img src="./img/main_icon_page.svg" alt="hint-icon" />
@@ -172,46 +195,76 @@ function render() {
           </span>
     `;
   }
+
+  // вывод заметок из массива на страницу
   for (let i = 0; i < notesArray.length; i++) {
+    // если заметка имеет закреплена, то пропустить её
     if (notesArray[i].fix) continue;
+    // вызов функции создания кода для заметки
     listElement.insertAdjacentHTML("beforeend", createNotes(notesArray[i], i));
   }
 
+  // вывод закреплённых заметок на страницу
   for (let i = 0; i < notesArrayFixed.length; i++)
+    // доабавление элемента заметки на страницу
     listElementFixed.insertAdjacentHTML(
       "beforeend",
       createNotes(notesArrayFixed[i], i),
     );
 }
+// обновление поля для заметок
 render();
 
 // кнопка создания заметки
 btnCreateNotes.addEventListener("click", () => {
+  // если поле ввода пустое, то выходим из функции
   if (inputElement.value.length === 0) return;
+  // создаём структуру новой заметки
   const newNote = {
+    // параметр названия заметки
     title: `${inputElement.value}`,
+    // параметр статуса "выполнить"
     completed: false,
+    // параметр фиксации
     fix: false,
+    // параметр редактированиф
     edit: false,
   };
+  // добавляем заметку в массив
   notesArray.push(newNote);
+  // обновление поле заметок
   render();
+  // чистим поле ввода
   inputElement.value = "";
 });
 
 // обработка собития кнопок заметки
 listElement.addEventListener("click", (e) => {
+  // если у элемента есть индекс
   if (e.target.dataset.index) {
+    // присваивание индекса элемента 
     const index = +e.target.dataset.index;
+    // присваивание тип элемента
     const type = e.target.dataset.type;
 
+    // если тип "toggle"
     if (type === "toggle")
+      // делаем заметку выполненной
       notesArray[index].completed = !notesArray[index].completed;
-    else if (type === "remove") notesArray.splice(index, 1);
+    // если тип "remove"
+    else if (type === "remove")
+      // удаляем заметку из массива 
+      notesArray.splice(index, 1);
+    // если тип "fixed"
     else if (type === "fixed") {
+      // ставим fix на true
       notesArray[index].fix = true;
+      // добавляем заметку в массив закреплённых
       notesArrayFixed.push(notesArray[index]);
-    } else if (type === "edit") {
+    }
+    // если тип "edit" 
+    else if (type === "edit") {
+      // присваиваем edit - true
       notesArray[index].edit = true;
 
       for (let i = 0; i < editBtn.length; i++) {
@@ -230,36 +283,55 @@ listElement.addEventListener("click", (e) => {
       }
     }
   }
+  // обновляем страницу заметок
   render();
 });
 
-// обработка собития кнопок закреплённой заметки
+// обработка события кнопок закреплённой заметки
 listElementFixed.addEventListener("click", (e) => {
+  // если у элемента есть индекс 
   if (e.target.dataset.index) {
+    // присваиваение индекса
     const index = +e.target.dataset.index;
+    // присваиваение типа
     const type = e.target.dataset.type;
 
+    // если тип равен "toggle"
     if (type === "toggle")
+      // ставим заметку выполненной
       notesArrayFixed[index].completed = !notesArrayFixed[index].completed;
+    // если тип равен "remove"
     else if (type === "remove") {
+      // удаляем заметку из массива зафиксированных
       notesArrayFixed.splice(index, 1);
+      // удаляем заметку из массива 
       notesArray.splice(index, 1);
+      // скрываем блок фиксированных заметок 
       mainFieldFixed.style.display = "none";
     }
-    if (type === "fixed") {
+    // если тип "fixed"
+    else if (type === "fixed") {
+      // ставим fix - false
       notesArray[index].fix = false;
+      // удаляем заметку из массива зафиксированных
       notesArrayFixed.splice(index, 1);
+      // скрываем блок фиксированных заметок
       mainFieldFixed.style.display = "none";
-    } else if (type === "edit") {
+    }
+    // если тип равен "edit" 
+    else if (type === "edit") {
+      // выставляем edit - true
       notesArrayFixed[index].edit = true;
     }
   }
+  // обновляем страницу заметок
   render();
 });
 
 // функция создания заметки
 function createNotes(note, index) {
-  return `<li class="notes">
+  // возвращаем структуру заметки
+  return `<li class="notes" data-index="${index}">
        <div class="notes-check-btns">
          <label class="notes-check-btns-checkbox">
            <input type="checkbox" ${note.completed ? "checked" : ""}/>
@@ -272,7 +344,7 @@ function createNotes(note, index) {
        </div>
        <p style="${
          note.completed ? "text-decoration: line-through;" : ""
-       }" class="text"  >${note.title}</p>
+       }" class="text">${note.title}</p>
        <div class="notes-btns">
          <button class="edit notes-btns-secure" data-type="edit" data-index="${index}">
            <img src="./img/border_color.svg" class="edit" alt="edit" data-type="edit" data-index="${index}"/>
