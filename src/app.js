@@ -270,49 +270,20 @@ listElement.addEventListener("click", (e) => {
       // Получаем элемент с классом "text"
       const noteContentElement =
         listElement.children[index].querySelector(".text");
-      const editBtn = listElement.children[index].querySelector(".edit");
 
-      console.log(editBtn);
-      notesArray[index].title = noteContentElement.value;
-
-      notesArray[index].edit = false;
-      // editBtn.addEventListener("click", () => {
-      //   console.log("yes");
-      //   if (notesArray[index].edit) {
-      //     noteContentElement.setAttribute("contentEditable", true);
-      //     console.log(noteContentElement);
-      //     noteContentElement.focus();
-      //   } else {
-      //     noteContentElement.removeAttribute("contentEditable");
-      //   }
-
-      //   notesArray[index].edit = false;
-      // });
-
-      // // Создаем поле ввода для редактирования
-      // const editInput = document.createElement("input");
-      // editInput.type = "text";
-      // editInput.value = notesArray[index].title; // Устанавливаем начальное значение в текущее содержимое заметки
-
-      // textElement ? console.log(textElement) : console.log("no");
-
-      // // Заменяем содержимое заметки полем ввода
-      // listElement.children[index].querySelector(".text").replaceWith(editInput);
-
-      // // Добавляем обработчик событий для сохранения изменений, когда поле ввода теряет фокус
-      // editInput.addEventListener("blur", () => {
-      //   // Обновляем содержимое заметки отредактированным значением
-      //   notesArray[index].title = editInput.value;
-
-      //   // Устанавливаем свойство edit заметки обратно в значение false
-      //   notesArray[index].edit = false;
-
-      //   // Обновляем отображение
-      //   render();
-      // });
-
-      // // Фокусируем на поле ввода для немедленного редактирования
-      // editInput.focus();
+      if (notesArray[index].edit) {
+        console.log("yes");
+        console.log(noteContentElement.value);
+        // Добавляем класс
+        noteContentElement.innerHTML = `<input type="test" value="${notesArray[index].title}">`;
+        console.log("yews ");
+        // Вместо задачи добавляем инпут с редактированием
+      } else {
+        let noteTask =
+          listElement.children[index].querySelector(".text > input").value;
+        console.log(noteTask);
+        notesArray[index].title = noteTask;
+      }
     }
   }
   // обновляем страницу заметок
@@ -374,9 +345,9 @@ function createNotes(note, index) {
            <span class="custom-radio" data-type="fixed" data-index="${index}"></span>
          </label>
        </div>
-       <p style="${note.completed ? "text-decoration: line-through;" : ""}" ${
-         note.edit ? "contentEditable" : ""
-       } class="text">${note.title}</p>
+       <p style="${
+         note.completed ? "text-decoration: line-through;" : ""
+       }" class="text">${note.title}</p>
        <div class="notes-btns">
          <button class="edit notes-btns-secure" data-type="edit" data-index="${index}">
            <img src="./img/border_color.svg" class="edit" alt="edit" data-type="edit" data-index="${index}"/>
