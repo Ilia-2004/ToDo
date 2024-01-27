@@ -84,21 +84,21 @@ btnCloseSearch.addEventListener("click", () => {
   mainHeaderSearch.style.padding = "0 54px 0 0";
 });
 
-function searchFuntion (text) {
+function searchFuntion(text) {
   for (let i = 0; i < notesArray.length; i++) {
     if (notesArray[i].title === text) {
       note.forEach((e) => {
         if (notesArray[i] === e.textContent) {
           console.log("lsjf");
         }
-      })
-    } 
+      });
+    }
   }
 }
 
 btnSearch.addEventListener("click", (e) => {
   searchFuntion(searchInputHeader.value);
-})
+});
 
 //#endregion
 
@@ -209,7 +209,7 @@ function render() {
     // доабавление элемента заметки на страницу
     listElementFixed.insertAdjacentHTML(
       "beforeend",
-      createNotes(notesArrayFixed[i], i),
+      createNotes(notesArrayFixed[i], i)
     );
 }
 // обновление поля для заметок
@@ -242,7 +242,7 @@ btnCreateNotes.addEventListener("click", () => {
 listElement.addEventListener("click", (e) => {
   // если у элемента есть индекс
   if (e.target.dataset.index) {
-    // присваивание индекса элемента 
+    // присваивание индекса элемента
     const index = +e.target.dataset.index;
     // присваивание тип элемента
     const type = e.target.dataset.type;
@@ -253,7 +253,7 @@ listElement.addEventListener("click", (e) => {
       notesArray[index].completed = !notesArray[index].completed;
     // если тип "remove"
     else if (type === "remove")
-      // удаляем заметку из массива 
+      // удаляем заметку из массива
       notesArray.splice(index, 1);
     // если тип "fixed"
     else if (type === "fixed") {
@@ -262,25 +262,57 @@ listElement.addEventListener("click", (e) => {
       // добавляем заметку в массив закреплённых
       notesArrayFixed.push(notesArray[index]);
     }
-    // если тип "edit" 
+    // если тип "edit"
     else if (type === "edit") {
-      // присваиваем edit - true
+      // Устанавливаем свойство edit заметки в значение true
       notesArray[index].edit = true;
 
-      for (let i = 0; i < editBtn.length; i++) {
-        let editMode = false;
+      // Получаем элемент с классом "text"
+      const noteContentElement =
+        listElement.children[index].querySelector(".text");
+      const editBtn = listElement.children[index].querySelector(".edit");
 
-        editBtn[i].addEventListener("click", () => {
-          if (editMode) {
-            text[i].removeAttribute("contentEditable");
-          } else {
-            text[i].setAttribute("contentEditable", true);
-            text[i].focus();
-          }
+      console.log(editBtn);
+      notesArray[index].title = noteContentElement.value;
 
-          editMode = !editMode;
-        });
-      }
+      notesArray[index].edit = false;
+      // editBtn.addEventListener("click", () => {
+      //   console.log("yes");
+      //   if (notesArray[index].edit) {
+      //     noteContentElement.setAttribute("contentEditable", true);
+      //     console.log(noteContentElement);
+      //     noteContentElement.focus();
+      //   } else {
+      //     noteContentElement.removeAttribute("contentEditable");
+      //   }
+
+      //   notesArray[index].edit = false;
+      // });
+
+      // // Создаем поле ввода для редактирования
+      // const editInput = document.createElement("input");
+      // editInput.type = "text";
+      // editInput.value = notesArray[index].title; // Устанавливаем начальное значение в текущее содержимое заметки
+
+      // textElement ? console.log(textElement) : console.log("no");
+
+      // // Заменяем содержимое заметки полем ввода
+      // listElement.children[index].querySelector(".text").replaceWith(editInput);
+
+      // // Добавляем обработчик событий для сохранения изменений, когда поле ввода теряет фокус
+      // editInput.addEventListener("blur", () => {
+      //   // Обновляем содержимое заметки отредактированным значением
+      //   notesArray[index].title = editInput.value;
+
+      //   // Устанавливаем свойство edit заметки обратно в значение false
+      //   notesArray[index].edit = false;
+
+      //   // Обновляем отображение
+      //   render();
+      // });
+
+      // // Фокусируем на поле ввода для немедленного редактирования
+      // editInput.focus();
     }
   }
   // обновляем страницу заметок
@@ -289,7 +321,7 @@ listElement.addEventListener("click", (e) => {
 
 // обработка события кнопок закреплённой заметки
 listElementFixed.addEventListener("click", (e) => {
-  // если у элемента есть индекс 
+  // если у элемента есть индекс
   if (e.target.dataset.index) {
     // присваиваение индекса
     const index = +e.target.dataset.index;
@@ -304,9 +336,9 @@ listElementFixed.addEventListener("click", (e) => {
     else if (type === "remove") {
       // удаляем заметку из массива зафиксированных
       notesArrayFixed.splice(index, 1);
-      // удаляем заметку из массива 
+      // удаляем заметку из массива
       notesArray.splice(index, 1);
-      // скрываем блок фиксированных заметок 
+      // скрываем блок фиксированных заметок
       mainFieldFixed.style.display = "none";
     }
     // если тип "fixed"
@@ -318,7 +350,7 @@ listElementFixed.addEventListener("click", (e) => {
       // скрываем блок фиксированных заметок
       mainFieldFixed.style.display = "none";
     }
-    // если тип равен "edit" 
+    // если тип равен "edit"
     else if (type === "edit") {
       // выставляем edit - true
       notesArrayFixed[index].edit = true;
@@ -342,9 +374,9 @@ function createNotes(note, index) {
            <span class="custom-radio" data-type="fixed" data-index="${index}"></span>
          </label>
        </div>
-       <p style="${
-         note.completed ? "text-decoration: line-through;" : ""
-       }" class="text">${note.title}</p>
+       <p style="${note.completed ? "text-decoration: line-through;" : ""}" ${
+         note.edit ? "contentEditable" : ""
+       } class="text">${note.title}</p>
        <div class="notes-btns">
          <button class="edit notes-btns-secure" data-type="edit" data-index="${index}">
            <img src="./img/border_color.svg" class="edit" alt="edit" data-type="edit" data-index="${index}"/>
