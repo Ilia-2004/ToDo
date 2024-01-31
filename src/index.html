@@ -26,14 +26,14 @@
       <img class="main-header-logo" src="img/Logo.svg" alt="logo" />
       <!-- поиск по заметкам -->
       <div class="main-header-search">
-        <button id="btn-search">
+        <div id="btn-search">
           <!-- картика поиска -->
           <img
             class="main-header-search-icon"
             src="img/search.svg"
             alt="search"
           />
-        </button>
+        </div>
         <!-- строка ввода поиска -->
         <input
           class="main-header-search-input"
@@ -111,10 +111,6 @@
           />
           <!-- кнопки -->
           <div class="main-field-btns">
-            <!-- кнопки создания списка -->
-            <button class="btn main-field-btn">
-              <img src="img/icon_list.svg" alt="list" />
-            </button>
             <!-- кнопка создания заметки -->
             <button id="btn-create-notes" class="btn main-field-btn">
               <img src="img/icon_check.svg" alt="add" />
@@ -127,7 +123,7 @@
         </div>
         <!-- блок закреплённых заметок -->
         <div id="main-field-fixed">
-          <p>Закреплённые</p>
+          <p class="main-p main-field-fixed-text">Закреплённые</p>
           <!-- список закреплённых заметок -->
           <ul id="list-fixed"></ul>
         </div>

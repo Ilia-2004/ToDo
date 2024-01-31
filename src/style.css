@@ -430,9 +430,11 @@ button {
   margin: 15px 18px 0 18px;
   max-width: 240px;
 }
-.notes .text[contentEditable] {
+.notes .noteInput {
+  border: none;
   padding: 5px 10px 5px 10px;
-  margin-right: 1rem;
+  width: 90%;
+  margin-right: 6rem;
   border-radius: 5px;
   background-color: #efefef;
   outline: none;
@@ -568,8 +570,9 @@ button {
   display: none;
   margin: 1rem 1rem 1rem 1rem;
 }
-.main-field #main-field-fixed p {
+.main-field #main-field-fixed .main-field-fixed-text {
   margin-left: 1rem;
+  color: gray;
 }
 
 /* important field */

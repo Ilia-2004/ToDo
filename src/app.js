@@ -11,8 +11,6 @@ import "./style.scss";
 const mainHeaderSearch = document.querySelector(".main-header-search");
 // строка ввода текста поиска заметок
 const searchInputHeader = document.querySelector(".main-header-search-input");
-// кнопка поиска
-const btnSearch = document.querySelector("#btn-search");
 // кнопка очистки поля ввода поиска зметок
 const btnCloseSearch = document.querySelector("#btn-close-search");
 
@@ -41,18 +39,12 @@ const btnCreateNotes = document.querySelector("#btn-create-notes");
 /* константы из notes */
 // поле ввода элемента
 const inputElement = document.querySelector(".main-field-add-input");
-// заметки
-const note = document.querySelectorAll(".notes[data-index]");
 // список заметок
 const listElement = document.querySelector("#list");
 // блок закреплённых заметок
 const mainFieldFixed = document.querySelector("#main-field-fixed");
 // список закреплённых заметок
 const listElementFixed = document.querySelector("#list-fixed");
-// кнопка редактирования заметки
-const editBtn = document.querySelectorAll(".edit");
-// текст заметки
-const text = document.querySelectorAll(".text");
 //#endregion
 
 //#region Header
@@ -83,23 +75,6 @@ btnCloseSearch.addEventListener("click", () => {
   // установка специального отступа
   mainHeaderSearch.style.padding = "0 54px 0 0";
 });
-
-function searchFuntion(text) {
-  for (let i = 0; i < notesArray.length; i++) {
-    if (notesArray[i].title === text) {
-      note.forEach((e) => {
-        if (notesArray[i] === e.textContent) {
-          console.log("lsjf");
-        }
-      });
-    }
-  }
-}
-
-btnSearch.addEventListener("click", (e) => {
-  searchFuntion(searchInputHeader.value);
-});
-
 //#endregion
 
 //#region Menu
@@ -209,7 +184,7 @@ function render() {
     // доабавление элемента заметки на страницу
     listElementFixed.insertAdjacentHTML(
       "beforeend",
-      createNotes(notesArrayFixed[i], i)
+      createNotes(notesArrayFixed[i], i),
     );
 }
 // обновление поля для заметок
@@ -240,8 +215,10 @@ btnCreateNotes.addEventListener("click", () => {
 
 // обработка собития кнопок заметки
 listElement.addEventListener("click", (e) => {
+  let renderFlag = false;
   // если у элемента есть индекс
   if (e.target.dataset.index) {
+    renderFlag = true;
     // присваивание индекса элемента
     const index = +e.target.dataset.index;
     // присваивание тип элемента
@@ -264,36 +241,25 @@ listElement.addEventListener("click", (e) => {
     }
     // если тип "edit"
     else if (type === "edit") {
-      // Устанавливаем свойство edit заметки в значение true
-      notesArray[index].edit = true;
-
-      // Получаем элемент с классом "text"
-      const noteContentElement =
-        listElement.children[index].querySelector(".text");
-
-      if (notesArray[index].edit) {
-        console.log("yes");
-        console.log(noteContentElement.value);
-        // Добавляем класс
-        noteContentElement.innerHTML = `<input type="test" value="${notesArray[index].title}">`;
-        console.log("yews ");
-        // Вместо задачи добавляем инпут с редактированием
-      } else {
-        let noteTask =
+      // меняем значения параметра "edit"
+      notesArray[index].edit = !notesArray[index].edit;
+      // если значение false
+      if (!notesArray[index].edit)
+        // присваеваем новый текст заметки
+        notesArray[index].title =
           listElement.children[index].querySelector(".text > input").value;
-        console.log(noteTask);
-        notesArray[index].title = noteTask;
-      }
     }
   }
   // обновляем страницу заметок
-  render();
+  if (renderFlag) render();
 });
 
 // обработка события кнопок закреплённой заметки
 listElementFixed.addEventListener("click", (e) => {
+  let renderFlag = false;
   // если у элемента есть индекс
   if (e.target.dataset.index) {
+    renderFlag = true;
     // присваиваение индекса
     const index = +e.target.dataset.index;
     // присваиваение типа
@@ -323,12 +289,17 @@ listElementFixed.addEventListener("click", (e) => {
     }
     // если тип равен "edit"
     else if (type === "edit") {
-      // выставляем edit - true
-      notesArrayFixed[index].edit = true;
+      // меняем значения параметра "edit"
+      notesArray[index].edit = !notesArray[index].edit;
+      // если значение false
+      if (!notesArray[index].edit)
+        // присваеваем новый текст заметки
+        notesArray[index].title =
+          listElementFixed.children[index].querySelector(".text > input").value;
     }
   }
   // обновляем страницу заметок
-  render();
+  if (renderFlag) render();
 });
 
 // функция создания заметки
@@ -345,9 +316,17 @@ function createNotes(note, index) {
            <span class="custom-radio" data-type="fixed" data-index="${index}"></span>
          </label>
        </div>
-       <p style="${
-         note.completed ? "text-decoration: line-through;" : ""
-       }" class="text">${note.title}</p>
+       ${
+         note.edit
+           ? `<p style="${
+               note.completed ? "text-decoration: line-through;" : ""
+             }" class="text"><input class="noteInput" type="text" value="${
+               note.title
+             }"></p>`
+           : `<p style="${
+               note.completed ? "text-decoration: line-through;" : ""
+             }" class="text">${note.title}</p>`
+       }
        <div class="notes-btns">
          <button class="edit notes-btns-secure" data-type="edit" data-index="${index}">
            <img src="./img/border_color.svg" class="edit" alt="edit" data-type="edit" data-index="${index}"/>
@@ -358,21 +337,4 @@ function createNotes(note, index) {
        </div>
      </li>`;
 }
-
-// // edit btn
-// for (let i = 0; i < editBtn.length; i++) {
-//   let editMode = false;
-//
-//   editBtn[i].addEventListener("click", () => {
-//     if (editMode) {
-//       text[i].removeAttribute("contentEditable");
-//     } else {
-//       text[i].setAttribute("contentEditable", true);
-//       text[i].focus();
-//     }
-//
-//     editMode = !editMode;
-//   });
-// }
-
 //#endregion
